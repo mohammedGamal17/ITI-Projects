@@ -1,0 +1,91 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --primaryColor: #007fff;
+  --darkPrimary: #001933;
+  --lightPrimary: #cce5ff;
+
+  --white: #ffffff;
+  --second: #66b2ff;
+  --third: #004c99;
+  --background: #f6f5f7;
+  --shadow: 1px 1px 10px 10px var(--second);
+  --text-shadow: 1px 1px 10px var(--second);
+}
+body {
+  font-family: "Oswald", sans-serif;
+  font-family: "Ubuntu", sans-serif;
+  background-color: var(--primaryColor);
+  background: linear-gradient(
+    to right,
+    var(--darkPrimary),
+    var(--third),
+    var(--primaryColor),
+    var(--second)
+  );
+
+  color: var(--background);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  background-color: transparent;
+  margin: 10% 0%;
+}
+button {
+  border-radius: 20px;
+  border: 1px solid var(--background);
+  background-color: transparent;
+  color: var(--white);
+  font-weight: bold;
+  padding: 12px 45px;
+  margin: 1rem 0rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:enabled:active {
+  transform: scale(1.05);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: var(--lightPrimary);
+}
+
+.input {
+  background-color: #eee;
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  border-radius: 1rem;
+}
+
+.container {
+  border: 0.1rem solid var(--white);
+  border-radius: 1rem;
+  box-shadow: var(--shadow);
+}
+.right-container {
+  border-radius: 1rem;
+  background-color: transparent;
+  border-right: 1px solid var(--white);
+  border-bottom: 1px solid var(--white);
+}
+
+.left-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: normal;
+  height: 100%;
+}
