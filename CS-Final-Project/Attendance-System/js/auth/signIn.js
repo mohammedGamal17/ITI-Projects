@@ -1,37 +1,63 @@
 let email = document.getElementById("email");
 let button = document.getElementById("button");
-emailValidation(button, email);
+const form = document.getElementById("form");
+formValidation(button, email);
+emailValidation(email);
 
+function formValidation(button, email) {
+  form.addEventListener("change", function () {
+    if (isEmail(email.value)) {
+      button.disabled = false;
+    } else {
+      button.disabled = true;
+    }
+  });
+}
 ///////////////////////////
 // Start Email Validation
 ///////////////////////////
 /*
+ * Name Validation Function DOM*
+ */
+
+/*
+ * Name Validation Function REGEX*
+ */
+function isName(string) {
+  let regex = /^[a-zA-Z]{3,8}$/;
+  if (string.match(regex)) return true;
+  return false;
+}
+///////////////////////////
+// End Name Validation
+///////////////////////////
+
+///////////////////////////
+// Start Email Validation
+///////////////////////////
+
+/*
  * Email Validation Function DOM*
  */
-function emailValidation(button, email) {
-  button.disabled = true;
-
+function emailValidation(email) {
   email.addEventListener("keyup", function () {
     if (isEmail(email.value)) {
       email.style.backgroundColor = "green";
-      button.disabled = false;
     } else {
       email.style.backgroundColor = "red";
-      button.disabled = true;
     }
-    console.log(isEmail(email.value));
   });
 }
 
 /*
  * Email Validation Function REGEX*
  */
-function isEmail(emailAddress) {
+function isEmail(email) {
   let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
-  if (emailAddress.match(regex) || emailAddress == null) return true;
+  if (email.match(regex) || email == null) return true;
   return false;
 }
 ///////////////////////////
-// End Validation
+// End Email Validation
 ///////////////////////////
