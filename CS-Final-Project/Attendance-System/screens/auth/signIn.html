@@ -20,16 +20,19 @@
     <div class="container w-50">
       <div class="row">
         <div class="right-container col-lg-8 col-md-8 col-12">
-          <form class="mt-1 mb-1" action="../auth/signUp.html" id="signInForm">
+          <form class="mt-1 mb-1" id="signInForm">
             <h1 class="fw-bold">Sign in</h1>
             <input
               class="form-control input"
               type="email"
+              name="email"
               placeholder="Email"
               id="email"
               required
             />
-            <button id="signInButton">Sign In</button>
+            <button type="submit" value="Submit" id="signInButton">
+              Sign In
+            </button>
           </form>
         </div>
         <div class="col-lg-4 col-md-4 col-12">

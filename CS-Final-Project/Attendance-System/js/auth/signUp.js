@@ -1,5 +1,17 @@
 window.addEventListener("load", function () {
   ///////////////////////////
+  ///* Start Init variables
+  ///////////////////////////
+  let firstNameV = "";
+  let lastNameV = "";
+  let addressV = "";
+  let ageV = "";
+  let emailV = "";
+  ///////////////////////////
+  ///* End Init variables
+  ///////////////////////////
+
+  ///////////////////////////
   ///* Start Get Elements
   ///////////////////////////
   const signUpForm = document.getElementById("signUpForm");
@@ -62,6 +74,11 @@ window.addEventListener("load", function () {
 
       if (isFormValid) {
         signUpButton.disabled = false;
+        firstNameV = firstName.value;
+        lastNameV = lastName.value;
+        addressV = address.value;
+        ageV = age.value;
+        emailV = email.value;
       } else {
         signUpButton.disabled = true;
       }
@@ -212,32 +229,48 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Local Storage
   ///////////////////////////
-  let users = [];
 
-  // Declare object
-  let user1 = {
-    firstName: "Mohammed",
-    LastName: "Gamal",
-    address: "cairo",
-    age: 24,
-    email: "mohammed@mo.com",
-    role: "emp",
-  };
-  let user2 = {
-    firstName: "Ahmed",
-    LastName: "Gamal",
-    address: "alex",
-    age: 24,
-    email: "ahmed@mo.com",
-    role: "admin",
-  };
+  function saveForm() {
+    let user = {
+      firstName: firstNameV,
+      lastName: lastNameV,
+      address: addressV,
+      age: ageV,
+      email: emailV,
+    };
+    const users = window.localStorage.getItem("users");
 
-  users.push(user1, user2);
+    if (users === null) {
+      window.localStorage.setItem("users", JSON.stringify([user]));
+    } else {
+      const getCurrentUsers = window.localStorage.getItem("users");
+      const currentUsers = JSON.parse(getCurrentUsers);
 
-  users.forEach((user) => {
-    console.log(user);
-  });
+      for (let i = 0; i < currentUsers.length; i++) {
+        if (currentUsers[i].email != emailV) {
+          currentUsers.push(user);
+        }
+      }
+
+      window.localStorage.setItem("users", JSON.stringify(currentUsers));
+    }
+  } // end of set data
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+  function getForm() {
+    const oldInfo = JSON.parse(localStorage.getItem("users"));
+    if (oldInfo != null) {
+      oldInfo.forEach((element) => {
+        console.log(element);
+      });
+    }
+  }
+  getForm();
+  signUpButton.addEventListener("click", saveForm);
+
   ///////////////////////////
   ///* End Local Storage
   ///////////////////////////
-});
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
+}); // End Of Load

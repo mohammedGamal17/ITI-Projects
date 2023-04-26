@@ -1,10 +1,21 @@
 window.addEventListener("load", function () {
   ///////////////////////////
+  ///* Start Init variables
+  ///////////////////////////
+  let emailV = "";
+  ///////////////////////////
+  ///* End Init variables
+  ///////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////
   ///* Start Get Elements
   ///////////////////////////
-  const signInForm = document.getElementById("signInForm");
+  let signInForm = document.getElementById("signInForm");
   let email = document.getElementById("email");
   let signInButton = document.getElementById("signInButton");
+  signInButton.disabled = true;
   ///////////////////////////
   ///* End Get Elements
   ///////////////////////////
@@ -29,6 +40,7 @@ window.addEventListener("load", function () {
     signInForm.addEventListener("change", function () {
       if (isEmail(email.value)) {
         signInButton.disabled = false;
+        emailV = email.value;
       } else {
         signInButton.disabled = true;
       }
@@ -68,8 +80,36 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Local Storage
   ///////////////////////////
+  function saveForm() {
+    var time = new Date();
+    let user = {
+      email: emailV,
+      time: time.toLocaleString("en-EG"),
+    };
+    const users = window.localStorage.getItem("login");
+
+    if (users === null) {
+      window.localStorage.setItem("login", JSON.stringify([user]));
+    } else {
+      const getCurrentLogin = window.localStorage.getItem("login");
+      const currentLogin = JSON.parse(getCurrentLogin);
+
+      currentLogin.push(user);
+
+      window.localStorage.setItem("login", JSON.stringify(currentLogin));
+    }
+  } // end of set data
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////
+  function getForm() {
+    const oldInfo = JSON.parse(localStorage.getItem("login"));
+    console.log(oldInfo);
+  }
+  getForm();
+  signInButton.addEventListener("click", saveForm);
 
   ///////////////////////////
   ///* End Local Storage
   ///////////////////////////
 });
+//End Of load
