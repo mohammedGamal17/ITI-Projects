@@ -1,5 +1,5 @@
 // window.addEventListener("load", function () {
-//   // preventInspectElement();
+//   preventInspectElement();
 // }); // window loaded
 
 // /*
