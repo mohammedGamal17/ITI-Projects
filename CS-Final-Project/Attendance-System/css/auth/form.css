@@ -70,6 +70,10 @@ button:disabled {
   border-radius: 1rem;
 }
 
+.input:hover {
+  transform: scale(1.02);
+}
+
 .container {
   border: 0.1rem solid var(--white);
   border-radius: 1rem;
