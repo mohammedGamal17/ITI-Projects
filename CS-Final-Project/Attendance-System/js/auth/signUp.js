@@ -229,14 +229,14 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Local Storage
   ///////////////////////////
-
+  var emailArr = [];
   function saveForm() {
     let user = {
-      firstName: firstNameV,
-      lastName: lastNameV,
-      address: addressV,
+      firstName: firstNameV.toLowerCase(),
+      lastName: lastNameV.toLowerCase(),
+      address: addressV.toLowerCase(),
       age: ageV,
-      email: emailV,
+      email: emailV.toLowerCase(),
     };
     const users = window.localStorage.getItem("users");
 
@@ -245,14 +245,12 @@ window.addEventListener("load", function () {
     } else {
       const getCurrentUsers = window.localStorage.getItem("users");
       const currentUsers = JSON.parse(getCurrentUsers);
-
-      for (let i = 0; i < currentUsers.length; i++) {
-        if (currentUsers[i].email != emailV) {
-          currentUsers.push(user);
-        }
+      if (!emailArr.includes(user.email)) {
+        currentUsers.push(user);
+        window.localStorage.setItem("users", JSON.stringify(currentUsers));
+      } else {
+        alert("This email had Registered before\nTry sign in");
       }
-
-      window.localStorage.setItem("users", JSON.stringify(currentUsers));
     }
   } // end of set data
 
@@ -261,10 +259,12 @@ window.addEventListener("load", function () {
     const oldInfo = JSON.parse(localStorage.getItem("users"));
     if (oldInfo != null) {
       oldInfo.forEach((element) => {
-        console.log(element);
+        emailArr.push(element.email);
+        //console.log(element);
       });
     }
   }
+  console.log(emailArr);
   getForm();
   signUpButton.addEventListener("click", saveForm);
 

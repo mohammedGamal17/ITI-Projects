@@ -80,6 +80,13 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Local Storage
   ///////////////////////////
+  var emailArr = [];
+  const users = JSON.parse(localStorage.getItem("users"));
+
+  users.forEach((element) => {
+    emailArr.push(element.email);
+    console.log(element.email);
+  });
   function saveForm() {
     var time = new Date();
     let user = {
@@ -94,18 +101,21 @@ window.addEventListener("load", function () {
       const getCurrentLogin = window.localStorage.getItem("login");
       const currentLogin = JSON.parse(getCurrentLogin);
 
-      currentLogin.push(user);
-
-      window.localStorage.setItem("login", JSON.stringify(currentLogin));
+      if (emailArr.includes(emailV)) {
+        currentLogin.push(user);
+        window.localStorage.setItem("login", JSON.stringify(currentLogin));
+      } else {
+        alert("There are no record like that \nPlease Register");
+      }
     }
   } // end of set data
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-  function getForm() {
-    const oldInfo = JSON.parse(localStorage.getItem("login"));
-    console.log(oldInfo);
-  }
-  getForm();
+  // function getForm() {
+  //   const oldInfo = JSON.parse(localStorage.getItem("login"));
+  //   console.log(oldInfo);
+  // }
+  // getForm();
   signInButton.addEventListener("click", saveForm);
 
   ///////////////////////////

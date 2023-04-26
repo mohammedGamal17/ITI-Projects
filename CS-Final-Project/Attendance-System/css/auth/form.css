@@ -37,6 +37,7 @@ body {
   background-color: transparent;
   margin: 10% 0%;
 }
+a,
 button {
   border-radius: 20px;
   border: 1px solid var(--background);
@@ -50,13 +51,15 @@ button {
   transition: transform 80ms ease-in;
   cursor: pointer;
   width: 100%;
+  text-decoration: none;
+  text-align: center;
 }
 
-button:enabled:active {
+button a:enabled:active {
   transform: scale(1.05);
 }
 
-button:disabled {
+button a:disabled {
   cursor: not-allowed;
   background-color: var(--lightPrimary);
 }
