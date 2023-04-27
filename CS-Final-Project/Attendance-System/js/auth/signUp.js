@@ -237,7 +237,6 @@ window.addEventListener("load", function () {
       address: addressV.toLowerCase(),
       age: ageV,
       email: emailV.toLowerCase(),
-      active: false,
       role: "employee",
     };
     const users = window.localStorage.getItem("users");
@@ -266,7 +265,6 @@ window.addEventListener("load", function () {
       });
     }
   }
-  console.log(emailArr);
   getForm();
   signUpButton.addEventListener("click", saveForm);
 
