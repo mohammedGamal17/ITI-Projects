@@ -4,7 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/all.min.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
     <title>Admin</title>
   </head>
-  <body></body>
+  <body>
+    <div class="table-responsive">
+      <table class="table users-table" id="users-table">
+        <thead>
+          <tr>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">Age</th>
+            <th scope="col">Role</th>
+            <th scope="col">Approve</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <script src="../../js/bootstrap.bundle.min.js"></script>
+    <script src="../../js/all.min.js"></script>
+    <script src="../../js/dashboard/adminDashboard.js"></script>
+    <script src="../../js/script.js"></script>
+  </body>
 </html>

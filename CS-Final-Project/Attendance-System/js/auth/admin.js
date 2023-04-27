@@ -115,7 +115,7 @@ window.addEventListener("load", function () {
     let admins = window.localStorage.getItem("admins");
     const admin = {
       email: "mohammed_gamal7@outlook.com",
-      password: "MoGemmy!7",
+      password: "MoMoMo!7",
     };
     if (admins === null) {
       window.localStorage.setItem("admins", JSON.stringify([admin]));

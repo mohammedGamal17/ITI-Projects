@@ -19,8 +19,14 @@
 body {
   font-family: "Oswald", sans-serif;
   font-family: "Ubuntu", sans-serif;
-  background: var(--background);
-  height: 100vh;
+  color: var(--white);
+  background: linear-gradient(
+    to right,
+    var(--darkPrimary),
+    var(--third),
+    var(--primaryColor),
+    var(--second)
+  );
 }
 
 button {
@@ -44,26 +50,12 @@ button:focus {
   outline: none;
 }
 
-form {
-  background-color: var(--background);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 50px;
-  height: 100%;
-  width: 100%;
-  text-align: center;
+.users-table th,
+td {
+  background-color: var(--primaryColor);
+  color: var(--white);
 }
-
-input {
-  background-color: #eee;
-  border: none;
-  padding: 12px 15px;
-  margin: 8px 0;
-  width: 100%;
-  border-radius: 1rem;
-}
-h1 {
-  color: var(--primaryColor);
+.users-table tr:hover > td {
+  background-color: var(--white);
+  color: var(--third);
 }
