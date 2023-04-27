@@ -22,7 +22,7 @@ window.addEventListener("load", function () {
   let age = document.getElementById("age");
   let signUpEmail = document.getElementById("signUpEmail");
   let signUpButton = document.getElementById("signUpButton");
-
+  signUpButton.disabled = true;
   ///////////////////////////
   ///* End Get Elements
   ///////////////////////////
@@ -237,6 +237,8 @@ window.addEventListener("load", function () {
       address: addressV.toLowerCase(),
       age: ageV,
       email: emailV.toLowerCase(),
+      active: false,
+      role: "employee",
     };
     const users = window.localStorage.getItem("users");
 
