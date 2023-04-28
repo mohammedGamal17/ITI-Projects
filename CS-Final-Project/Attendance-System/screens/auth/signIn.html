@@ -20,19 +20,29 @@
     <div class="container w-50">
       <div class="row">
         <div class="right-container col-lg-8 col-md-8 col-12">
-          <form class="mt-1 mb-1" id="signInForm">
+          <form
+            class="mt-1 mb-1"
+            action="../dashboard/employeeDashboard.html"
+            id="signInForm"
+          >
             <h1 class="fw-bold">Sign in</h1>
             <input
               class="form-control input"
-              type="email"
-              name="email"
-              placeholder="Email"
-              id="email"
+              type="username"
+              name="username"
+              placeholder="username"
+              id="username"
               required
             />
-            <button type="submit" value="Submit" id="signInButton">
-              Sign In
-            </button>
+            <input
+              class="form-control input"
+              type="password"
+              name="password"
+              placeholder="password"
+              id="password"
+            />
+            <input type="submit" value="Sign In" id="signInButton" />
+            <!-- <button type="submit" value="Submit">Sign In</button> -->
           </form>
         </div>
         <div class="col-lg-4 col-md-4 col-12">

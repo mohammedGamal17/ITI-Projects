@@ -1,8 +1,10 @@
+var userPlusPass = [];
 window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Init variables
   ///////////////////////////
-  let emailV = "";
+  let usernameV = "";
+  let passV = "";
   ///////////////////////////
   ///* End Init variables
   ///////////////////////////
@@ -13,7 +15,8 @@ window.addEventListener("load", function () {
   ///* Start Get Elements
   ///////////////////////////
   let signInForm = document.getElementById("signInForm");
-  let email = document.getElementById("email");
+  let username = document.getElementById("username");
+  let password = document.getElementById("password");
   let signInButton = document.getElementById("signInButton");
   signInButton.disabled = true;
   ///////////////////////////
@@ -25,8 +28,9 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Call Functions
   ///////////////////////////
-  signInFormValidation(signInButton, email);
-  signInEmailValidation(email);
+  signInFormValidation(signInButton, username);
+  signInEmailValidation(username);
+  signInPasswordValidation(password);
   ///////////////////////////
   ///* End Call Functions
   ///////////////////////////
@@ -36,11 +40,12 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Auth Validations Functions
   ///////////////////////////
-  function signInFormValidation(signInButton, email) {
+  function signInFormValidation(signInButton, username) {
     signInForm.addEventListener("change", function () {
-      if (isEmail(email.value)) {
+      if (isUserName(username.value) && isPassword(password.value)) {
         signInButton.disabled = false;
-        emailV = email.value;
+        usernameV = username.value;
+        passV = password.value;
       } else {
         signInButton.disabled = true;
       }
@@ -55,20 +60,22 @@ window.addEventListener("load", function () {
   ///////////////////////////
   ///* Start Email Validation
   ///////////////////////////
-  function signInEmailValidation(email) {
-    email.addEventListener("keyup", function () {
-      if (isEmail(email.value)) {
-        email.style.backgroundColor = "green";
+
+  function signInEmailValidation(username) {
+    username.addEventListener("keyup", function () {
+      if (isUserName(username.value)) {
+        username.style.backgroundColor = "green";
       } else {
-        email.style.backgroundColor = "red";
+        username.style.backgroundColor = "red";
       }
     });
   }
+  // [!"`'#%&,:;<>=@{}~\$\(\)\*\+\/\\\?\[\]\^\|]+
+  function isUserName(username) {
+    "^[A-Za-z][A-Za-z0-9_]{7,29}$";
+    let regex = /^[a-z0-9_.]{7,29}$/;
 
-  function isEmail(email) {
-    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-
-    if (email.match(regex) || email == null) return true;
+    if (username.match(regex) || username == null) return true;
     return false;
   }
   ///////////////////////////
@@ -78,45 +85,50 @@ window.addEventListener("load", function () {
   ///////////////////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////
+  ///* Start Password Validation
+  ///////////////////////////
+  function signInPasswordValidation(password) {
+    password.addEventListener("keyup", function () {
+      if (isPassword(password.value)) {
+        password.style.backgroundColor = "green";
+      } else {
+        password.style.backgroundColor = "red";
+      }
+    });
+  }
+
+  function isPassword(password) {
+    let regex =
+      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&?, "])[a-zA-Z0-9!#$%&,?]{8,9}$/;
+
+    if (password.match(regex) || password == null) return true;
+    return false;
+  }
+  ///////////////////////////
+  ///* End Password Validation
+  ///////////////////////////
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////
   ///* Start Local Storage
   ///////////////////////////
-  var emailArr = [];
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  users.forEach((element) => {
-    emailArr.push(element.email);
-    console.log(element.email);
+  const employees = JSON.parse(window.localStorage.getItem("employees"));
+  employees.forEach((element) => {
+    userPlusPass.push(element.username + element.password);
   });
-  function saveForm() {
-    var time = new Date();
-    let user = {
-      email: emailV,
-      time: time.toLocaleString("en-EG"),
-    };
-    const users = window.localStorage.getItem("login");
 
-    if (users === null) {
-      window.localStorage.setItem("login", JSON.stringify([user]));
+  signInButton.addEventListener("click", login);
+  function login(e) {
+    if (!userPlusPass.includes(usernameV + passV)) {
+      alert("Failed!!\nUsername or Password you entered is wrong");
+      e.preventDefault();
     } else {
-      const getCurrentLogin = window.localStorage.getItem("login");
-      const currentLogin = JSON.parse(getCurrentLogin);
-
-      if (emailArr.includes(emailV)) {
-        currentLogin.push(user);
-        window.localStorage.setItem("login", JSON.stringify(currentLogin));
-      } else {
-        alert("There are no record like that \nPlease Register");
-      }
+      window.localStorage.setItem("username", usernameV);
     }
-  } // end of set data
-
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////
-  // function getForm() {
-  //   const oldInfo = JSON.parse(localStorage.getItem("login"));
-  //   console.log(oldInfo);
-  // }
-  // getForm();
-  signInButton.addEventListener("click", saveForm);
 
   ///////////////////////////
   ///* End Local Storage
