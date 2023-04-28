@@ -27,6 +27,7 @@ body {
     var(--primaryColor),
     var(--second)
   );
+  padding: 1rem;
 }
 
 button {
@@ -58,4 +59,19 @@ td {
 .users-table tr:hover > td {
   background-color: var(--white);
   color: var(--third);
+}
+
+.nav-item button {
+  color: var(--background);
+}
+.nav-link:active,
+.nav-link:focus {
+  background-color: #ffffff !important;
+  color: var(--primaryColor) !important;
+  border-radius: 0rem;
+}
+
+.employee-nav {
+  background-color: var(--primaryColor);
+  border-bottom: 1px solid var(--background);
 }
