@@ -120,11 +120,10 @@ window.addEventListener("load", function () {
 
   drawMonthlyTable();
   function drawMonthlyTable() {
-    const dailyTbody = document.getElementById("monthly-table");
+    const monthlyTbody = document.getElementById("monthly-table");
     att.map((e) => {
       let formed = e.split(" ").join(" , ");
-      console.log(formed);
-      dailyTbody.innerHTML += `
+      monthlyTbody.innerHTML += `
           <tr>
             <td>${formed}</td>
           </tr>
