@@ -1,6 +1,9 @@
 var att = [];
 var attendCountPerDay = 0;
 window.addEventListener("load", function () {
+  ///************************************************************************************** */
+  ///************************ Start Attendance Section ************************************ */
+  ///************************************************************************************** */
   let employeeData = {};
   const confirmAttendance = document.getElementById("confirmAttendance");
   insertEmployeeData();
@@ -89,6 +92,51 @@ window.addEventListener("load", function () {
       setTimeout(setNewAttendance, sevenAndHalfHours);
     }
   }
+  ///************************************************************************************ */
+  ///************************ End Attendance Section ************************************ */
+  ///************************************************************************************ */
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///*********************************************************************************** */
+  ///************************ Start Reports Section ************************************ */
+  ///*********************************************************************************** */
+
+  drawDailyTable();
+  function drawDailyTable() {
+    const dailyTbody = document.getElementById("daily-tbody");
+    let today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
+    att.map((e, index) => {
+      if (e.includes(today)) {
+        dailyTbody.innerHTML += `
+          <tr>
+            <td>${today}</td>
+            <td>${e}</td>
+          </tr>
+        `;
+      }
+    });
+  }
+
+  drawMonthlyTable();
+  function drawMonthlyTable() {
+    const dailyTbody = document.getElementById("monthly-table");
+    att.map((e) => {
+      let formed = e.split(" ").join(" , ");
+      console.log(formed);
+      dailyTbody.innerHTML += `
+          <tr>
+            <td>${formed}</td>
+          </tr>
+        `;
+    });
+  }
+
+  ///********************************************************************************* */
+  ///************************ End Reports Section ************************************ */
+  ///********************************************************************************* */
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 });
 
 function padTo2Digits(num) {
