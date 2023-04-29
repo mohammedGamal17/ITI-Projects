@@ -1,5 +1,10 @@
 var pendingUsers = [];
 var employeesEmail = [];
+var att = [];
+var today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
+///************************************************************************************** */
+///************************ Start Email Register Requests Section *********************** */
+///************************************************************************************** */
 window.addEventListener("load", function () {
   ///* get requests from local storage
 
@@ -152,7 +157,79 @@ function createRandomPassword() {
   }
   return pass;
 }
+///************************************************************************************ */
+///************************ End Email Register Requests Section *********************** */
+///************************************************************************************ */
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///*********************************************************************************** */
+///************************ Start Reports Section ************************************ */
+///*********************************************************************************** */
+getAllAttendance();
+function getAllAttendance() {
+  let employees = JSON.parse(window.localStorage.getItem("employees"));
+  const monthlyTbody = document.getElementById("monthly-table");
+  employees.map((emp) => {
+    if (emp.attendance != null) {
+      var empFullName = emp.firstName + " " + emp.lastName;
+      emp.attendance.map((e) => {
+        let formed = e.split(" ").join(" , ");
+
+        monthlyTbody.innerHTML += `
+          <tr>
+            <td>${emp.firstName} ${emp.lastName}</td>
+            <td>${emp.email}</td>
+            <td>${formed}</td>
+          </tr>
+        `;
+
+        att.push({ name: empFullName, email: emp.email, attendance: formed });
+      });
+    }
+  });
+}
+
+drawDailyTable();
+function drawDailyTable() {
+  const dailyTbody = document.getElementById("daily-tbody");
+
+  att.map((e) => {
+    if (e.attendance.includes(today)) {
+      dailyTbody.innerHTML += `
+          <tr>
+            <td>${e.name}</td>
+            <td>${e.email}</td>
+            <td>${e.attendance}</td>
+          </tr>
+        `;
+    }
+  });
+}
+
+///********************************************************************************* */
+///************************ End Reports Section ************************************ */
+///********************************************************************************* */
 
 // Math.random() // Generate random number, eg: 0.123456
 //   .toString(36) // Convert  to base-36 : "0.4fzyo82mvyr"
 //   .slice(-8); // Cut off last 8 characters : "yo82mvyr"
+function padTo2Digits(num) {
+  return num.toString().padStart(2, "0");
+}
+
+function formatDate(date) {
+  return (
+    [
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+      date.getFullYear(),
+    ].join("/") +
+    " " +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(":")
+  );
+}
