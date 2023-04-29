@@ -8,6 +8,7 @@ window.addEventListener("load", function () {
   getOldAttendance();
   checkUserNameValidation();
   setAutoDeparture();
+
   function insertEmployeeData() {
     const username = window.localStorage.getItem("username");
     const employees = JSON.parse(window.localStorage.getItem("employees"));
