@@ -7,7 +7,7 @@ window.addEventListener("load", function () {
   displayName();
   getOldAttendance();
   checkUserNameValidation();
-
+  setAutoDeparture();
   function insertEmployeeData() {
     const username = window.localStorage.getItem("username");
     const employees = JSON.parse(window.localStorage.getItem("employees"));
@@ -62,7 +62,7 @@ window.addEventListener("load", function () {
     });
   }
 
-  function setNewAttendance(e) {
+  function setNewAttendance() {
     const username = window.localStorage.getItem("username");
     let employees = JSON.parse(window.localStorage.getItem("employees"));
     let attendance;
@@ -80,6 +80,14 @@ window.addEventListener("load", function () {
   }
 
   confirmAttendance.addEventListener("click", setNewAttendance);
+
+  function setAutoDeparture() {
+    const sevenAndHalfHours = 7.5 * 1000 * 3600;
+
+    if (attendCountPerDay === 1) {
+      setTimeout(setNewAttendance, sevenAndHalfHours);
+    }
+  }
 });
 
 function padTo2Digits(num) {
