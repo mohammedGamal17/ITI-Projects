@@ -30,6 +30,20 @@ body {
   padding: 1rem;
 }
 
+#mainBody {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#admin:hover,
+#employee:hover {
+  transform: scale(1.1);
+  background-color: var(--darkPrimary) !important;
+  color: var(--background);
+}
+
 button {
   border-radius: 20px;
   border: 1px solid var(--background);

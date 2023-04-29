@@ -30,3 +30,14 @@
 //     }
 //   };
 // }
+
+const adminBtn = document.getElementById("admin");
+adminBtn.addEventListener("click", function () {
+  //   window.location.href = "../Attendance-System/screens/auth/admin.html";
+  window.location.replace("../Attendance-System/screens/auth/admin.html");
+});
+
+const employeeBtn = document.getElementById("employee");
+employeeBtn.addEventListener("click", function () {
+  window.location.replace("../Attendance-System/screens/auth/signIn.html");
+});
