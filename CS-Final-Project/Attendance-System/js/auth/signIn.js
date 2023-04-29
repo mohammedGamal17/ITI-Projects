@@ -99,7 +99,7 @@ window.addEventListener("load", function () {
 
   function isPassword(password) {
     let regex =
-      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&?, "])[a-zA-Z0-9!#$%&,?]{8,9}$/;
+      /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$%&?@, "])[a-zA-Z0-9!#$%&@,?]{8,9}$/;
 
     if (password.match(regex) || password == null) return true;
     return false;
