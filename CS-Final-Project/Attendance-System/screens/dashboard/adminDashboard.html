@@ -56,6 +56,20 @@
             Employees Reports
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            profile
+          </button>
+        </li>
       </ul>
       <!-- End dashboard menu -->
 
@@ -87,7 +101,7 @@
         </div>
         <!-- End Emails Registration -->
 
-        <!-- Start Employee Section -->
+        <!-- Start Admin Section -->
         <div
           class="tab-pane fade ps-5 pe-5"
           id="pills-employee"
@@ -177,6 +191,21 @@
             <!-- End Reports -->
           </div>
         </div>
+        <!-- End Admin Section -->
+        <!-- Start Profile -->
+        <div
+          class="tab-pane fade ps-5 pe-5"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <!-- Start Admin Data -->
+          <div class="mt-4">
+            <form class="mt-1 mb-1" id="profileFrom"></form>
+          </div>
+          <!-- End Admin Data -->
+        </div>
+        <!-- End Profile -->
         <!-- End Employee Section -->
       </div>
       <!-- End dashboard content -->

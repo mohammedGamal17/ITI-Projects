@@ -211,6 +211,78 @@ function drawDailyTable() {
 ///************************ End Reports Section ************************************ */
 ///********************************************************************************* */
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///********************************************************************************** */
+///************************ Start Profile Section ******************************** */
+///********************************************************************************** */
+displayProfileDate();
+function displayProfileDate() {
+  const profileFrom = document.getElementById("profileFrom");
+
+  let admins = JSON.parse(window.localStorage.getItem("admins"));
+
+  admins.forEach((element) => {
+    profileFrom.innerHTML = `
+                <label for="fname">Email</label>
+                <input
+                class="form-control"
+                type="text"
+                placeholder="${element.email}"
+                name="email"
+                id="email"
+                disabled
+              />
+              <label for="fname">Password</label>
+              <input
+                class="form-control"
+                type="text"
+                placeholder="${element.password}"
+                name="password"
+                id="password"
+                disabled
+              />
+  `;
+  });
+}
+///********************************************************************************* */
+///************************ End Profile Section ************************************ */
+///********************************************************************************* */
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///********************************************************************************** */
+///************************ Start Attendance Section ******************************** */
+///********************************************************************************** */
+
+function setAutoDeparture() {
+  // let now = new Date();
+  // let dateTimeStr = now.toLocaleString();
+  // let time1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30);
+  // let time2 = Date.parse(dateTimeStr);
+  // let time3 = Date.parse(time1);
+  // let time4 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 20);
+  // let time5 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 30);
+  // let OnTime = Date.parse(time5);
+  // let earlyTime = Date.parse(time4);
+
+  // let diffInMinutes = (time3 - time2) / 60000;
+  // let diffInMinutesForLeave = Math.round(Math.abs((time2 - earlyTime) / 60000));
+
+  // let getMinutesLate = Math.round(Math.abs(diffInMinutes));
+
+  const sevenAndHalfHours = 7.5 * 1000 * 3600;
+
+  if (attendCountPerDay === 1) {
+    setTimeout(setNewAttendance, sevenAndHalfHours);
+  }
+}
+///************************************************************************************ */
+///************************ End Attendance Section ************************************ */
+///************************************************************************************ */
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // Math.random() // Generate random number, eg: 0.123456
 //   .toString(36) // Convert  to base-36 : "0.4fzyo82mvyr"
 //   .slice(-8); // Cut off last 8 characters : "yo82mvyr"
