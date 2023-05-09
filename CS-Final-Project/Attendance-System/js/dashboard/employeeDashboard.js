@@ -3,6 +3,7 @@ var attendCountPerDay = 0;
 var employeeData = {};
 
 var now = new Date();
+
 var startDate = new Date(
   now.getFullYear(),
   now.getMonth(),
@@ -11,6 +12,13 @@ var startDate = new Date(
   30
 );
 
+var forgivenessDate = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate(),
+  8,
+  45
+);
 var Departure = new Date(
   now.getFullYear(),
   now.getMonth(),
@@ -79,7 +87,6 @@ window.addEventListener("load", function () {
       if (
         usernameInput.value === employeeData.username &&
         attendCountPerDay < 2 &&
-        startDateParse < now &&
         now < DepartureParse
       ) {
         confirmAttendance.disabled = false;
@@ -95,16 +102,43 @@ window.addEventListener("load", function () {
     const username = window.localStorage.getItem("username");
     let employees = JSON.parse(window.localStorage.getItem("employees"));
     let attendance;
-
     let d = new Date();
-    employees.map((emp) => {
-      if (emp.username === username) {
-        att.push(formatDate(d));
-        emp.attendance = att;
-        attendance = emp;
-      }
-    });
-    window.localStorage.setItem("employees", JSON.stringify(employees));
+
+    ///* check if employee in forgiveness period
+    if (startDateParse < now && now < forgivenessDate) {
+      employees.map((emp) => {
+        if (emp.username === username) {
+          att.push(formatDate(d));
+          emp.attendance = att;
+          attendance = emp;
+        }
+      });
+      window.localStorage.setItem("employees", JSON.stringify(employees));
+    } else {
+      employees.map((emp) => {
+        if (emp.username === username) {
+          var message;
+          do {
+            message = prompt("Type your reason for Delay");
+          } while (message.length < 5);
+
+          att.push(formatDate(d));
+          if (emp.late == null) {
+            emp.late = {
+              count: 1,
+              details: [{ date: formatDate(d), reason: message }],
+            };
+          } else {
+            emp.late.count++;
+            emp.late.details.push({ date: formatDate(d), reason: message });
+          }
+          emp.attendance = att;
+          attendance = emp;
+        }
+      });
+      window.localStorage.setItem("employees", JSON.stringify(employees));
+    }
+
     window.location.replace("../../screens/dashboard/employeeDashboard.html");
   }
 

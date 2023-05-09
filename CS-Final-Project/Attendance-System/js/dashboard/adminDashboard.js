@@ -2,6 +2,27 @@ var pendingUsers = [];
 var employeesEmail = [];
 var att = [];
 var today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
+var now = new Date();
+var startDate = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate(),
+  8,
+  30
+);
+
+var Departure = new Date(
+  now.getFullYear(),
+  now.getMonth(),
+  now.getDate(),
+  15,
+  30
+);
+
+var nowParse = Date.parse(now);
+var startDateParse = Date.parse(startDate);
+var DepartureParse = Date.parse(Departure);
+
 ///************************************************************************************** */
 ///************************ Start Email Register Requests Section *********************** */
 ///************************************************************************************** */
@@ -170,24 +191,46 @@ getAllAttendance();
 function getAllAttendance() {
   let employees = JSON.parse(window.localStorage.getItem("employees"));
   const monthlyTbody = document.getElementById("monthly-table");
-  employees.map((emp) => {
-    if (emp.attendance != null) {
-      var empFullName = emp.firstName + " " + emp.lastName;
-      emp.attendance.map((e) => {
-        let formed = e.split(" ").join(" , ");
+  if (employees != null) {
+    employees.map((emp) => {
+      if (emp.attendance != null) {
+        var empFullName = emp.firstName + " " + emp.lastName;
+        emp.attendance.map((e) => {
+          let formed = e.split(" ").join(" ");
 
-        monthlyTbody.innerHTML += `
+          var reason;
+          if (emp.late != undefined) {
+            emp.late.details.forEach((e) => {
+              if (formed == e.date) {
+                if (e.reason != undefined) {
+                  reason = e.reason;
+                } else {
+                  reason = " ";
+                }
+              }
+            });
+          }
+
+          monthlyTbody.innerHTML += `
           <tr>
             <td>${emp.firstName} ${emp.lastName}</td>
             <td>${emp.email}</td>
             <td>${formed}</td>
+            <td>${formed}</td>
+            <td>${reason}</td>
           </tr>
         `;
 
-        att.push({ name: empFullName, email: emp.email, attendance: formed });
-      });
-    }
-  });
+          att.push({
+            name: empFullName,
+            email: emp.email,
+            attendance: formed,
+            reason: reason,
+          });
+        });
+      }
+    });
+  }
 }
 
 drawDailyTable();
@@ -201,6 +244,7 @@ function drawDailyTable() {
             <td>${e.name}</td>
             <td>${e.email}</td>
             <td>${e.attendance}</td>
+            <td>${e.reason}</td>
           </tr>
         `;
     }
@@ -256,21 +300,6 @@ function displayProfileDate() {
 ///********************************************************************************** */
 
 function setAutoDeparture() {
-  // let now = new Date();
-  // let dateTimeStr = now.toLocaleString();
-  // let time1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30);
-  // let time2 = Date.parse(dateTimeStr);
-  // let time3 = Date.parse(time1);
-  // let time4 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 20);
-  // let time5 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 30);
-  // let OnTime = Date.parse(time5);
-  // let earlyTime = Date.parse(time4);
-
-  // let diffInMinutes = (time3 - time2) / 60000;
-  // let diffInMinutesForLeave = Math.round(Math.abs((time2 - earlyTime) / 60000));
-
-  // let getMinutesLate = Math.round(Math.abs(diffInMinutes));
-
   const sevenAndHalfHours = 7.5 * 1000 * 3600;
 
   if (attendCountPerDay === 1) {
