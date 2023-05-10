@@ -1,6 +1,8 @@
 var pendingUsers = [];
 var employeesEmail = [];
 var att = [];
+var lateReport = [];
+
 var today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
 var now = new Date();
 var startDate = new Date(
@@ -216,11 +218,14 @@ function getAllAttendance() {
             <td>${emp.firstName} ${emp.lastName}</td>
             <td>${emp.email}</td>
             <td>${formed}</td>
-            <td>${formed}</td>
-            <td>${reason}</td>
           </tr>
         `;
-
+          lateReport.push({
+            name: empFullName,
+            email: emp.email,
+            reason: reason,
+            date: formed,
+          });
           att.push({
             name: empFullName,
             email: emp.email,
@@ -244,13 +249,28 @@ function drawDailyTable() {
             <td>${e.name}</td>
             <td>${e.email}</td>
             <td>${e.attendance}</td>
+          </tr>
+        `;
+    }
+  });
+}
+drawLateTable();
+function drawLateTable() {
+  const late = document.getElementById("late-tbody");
+
+  lateReport.map((e) => {
+    if (e.reason != undefined) {
+      late.innerHTML += `
+          <tr>
+            <td>${e.name}</td>
+            <td>${e.email}</td>
+            <td>${e.date}</td>
             <td>${e.reason}</td>
           </tr>
         `;
     }
   });
 }
-
 ///********************************************************************************* */
 ///************************ End Reports Section ************************************ */
 ///********************************************************************************* */
