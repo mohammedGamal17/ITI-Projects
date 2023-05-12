@@ -127,6 +127,8 @@ window.addEventListener("load", function () {
       if (element.password !== passwordV || element.email !== emailV) {
         alert("Error Email or Password");
         e.preventDefault();
+      } else {
+        window.localStorage.setItem("adminUser", JSON.stringify(emailV));
       }
     });
   }
