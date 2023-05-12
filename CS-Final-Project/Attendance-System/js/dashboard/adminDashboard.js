@@ -6,6 +6,8 @@ if (username != "mohammed_gamal7@outlook.com") {
   var pendingUsers = [];
   var employeesEmail = [];
   var att = [];
+
+  // var lateReport = JSON.parse(window.localStorage.getItem("late"));
   var lateReport = [];
 
   var today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
@@ -225,12 +227,18 @@ if (username != "mohammed_gamal7@outlook.com") {
             <td>${formed}</td>
           </tr>
         `;
-            lateReport.push({
-              name: empFullName,
-              email: emp.email,
-              reason: reason,
-              date: formed,
-            });
+
+            if (reason != undefined) {
+              lateReport.push({
+                name: empFullName,
+                email: emp.email,
+                reason: reason,
+                date: formed,
+              });
+
+              window.localStorage.setItem("late", JSON.stringify(lateReport));
+            }
+
             att.push({
               name: empFullName,
               email: emp.email,
@@ -262,19 +270,46 @@ if (username != "mohammed_gamal7@outlook.com") {
   drawLateTable();
   function drawLateTable() {
     const late = document.getElementById("late-tbody");
+    var lateRepo = JSON.parse(window.localStorage.getItem("late"));
 
-    lateReport.map((e) => {
-      if (e.reason != undefined) {
+    for (let i = 0; i < lateReport.length; i++) {
+      const element = lateReport[i];
+      if (element.reason != undefined) {
         late.innerHTML += `
           <tr>
-            <td>${e.name}</td>
-            <td>${e.email}</td>
-            <td>${e.date}</td>
-            <td>${e.reason}</td>
+            <td>${element.name}</td>
+            <td>${element.email}</td>
+            <td>${element.date}</td>
+            <td>${element.reason}</td>
           </tr>
         `;
       }
-    });
+
+      // <td>
+      //   <div class="container">
+      //     <div class="row">
+      //       <div class="col-lg-6 mb-lg-0 mb-2">
+      //         <button class="btn btn-success" id="allowBtn">
+      //           Accept
+      //         </button>
+      //       </div>
+      //       <div class="col-lg-6 mb-lg-0 mb-2">
+      //         <button class="btn btn-danger" id="rejectBtn">
+      //           Reject
+      //         </button>
+      //       </div>
+      //     </div>
+      //   </div>
+      // </td>;
+    }
+  }
+
+  function deleteFromLateTable(index) {
+    lateReport.splice(index, 1);
+    document.getElementById("late-tbody").innerHTML = "";
+    window.localStorage.setItem("late", JSON.stringify(lateReport));
+
+    drawLateTable();
   }
   ///********************************************************************************* */
   ///************************ End Reports Section ************************************ */

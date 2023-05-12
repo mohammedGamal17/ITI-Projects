@@ -27,8 +27,8 @@ if (username == null) {
     now.getFullYear(),
     now.getMonth(),
     now.getDate(),
-    15,
-    30
+    19,
+    59
   );
 
   var nowParse = Date.parse(now);
@@ -149,21 +149,6 @@ if (username == null) {
     confirmAttendance.addEventListener("click", setNewAttendance);
 
     function setAutoDeparture() {
-      // let now = new Date();
-      // let dateTimeStr = now.toLocaleString();
-      // let time1 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 7, 30);
-      // let time2 = Date.parse(dateTimeStr);
-      // let time3 = Date.parse(time1);
-      // let time4 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 17, 20);
-      // let time5 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 20, 30);
-      // let OnTime = Date.parse(time5);
-      // let earlyTime = Date.parse(time4);
-
-      // let diffInMinutes = (time3 - time2) / 60000;
-      // let diffInMinutesForLeave = Math.round(Math.abs((time2 - earlyTime) / 60000));
-
-      // let getMinutesLate = Math.round(Math.abs(diffInMinutes));
-
       const sevenAndHalfHours = 7.5 * 1000 * 3600;
 
       if (attendCountPerDay === 1) {
