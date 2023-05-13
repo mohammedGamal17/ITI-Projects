@@ -56,6 +56,23 @@
             Employees Reports
           </button>
         </li>
+        <li class="nav-item" role="presentation">
+          <button
+            class="nav-link"
+            id="pills-profile-tab"
+            data-bs-toggle="pill"
+            data-bs-target="#pills-profile"
+            type="button"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+          >
+            profile
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="Logout" type="button">Logout</button>
+        </li>
       </ul>
       <!-- End dashboard menu -->
 
@@ -87,7 +104,7 @@
         </div>
         <!-- End Emails Registration -->
 
-        <!-- Start Employee Section -->
+        <!-- Start Admin Section -->
         <div
           class="tab-pane fade ps-5 pe-5"
           id="pills-employee"
@@ -123,6 +140,34 @@
                   aria-selected="false"
                 >
                   Monthly Report
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-year-reports-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-year-reports"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-year-reports"
+                  aria-selected="false"
+                >
+                  Year Report
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="pills-late-reports-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-late-reports"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-late-reports"
+                  aria-selected="false"
+                >
+                  Late Report
                 </button>
               </li>
             </ul>
@@ -173,10 +218,71 @@
                 </div>
               </div>
               <!-- End Monthly Report -->
+              <!-- Start Year Report -->
+              <div
+                class="tab-pane fade ps-5 pe-5"
+                id="pills-year-reports"
+                role="tabpanel"
+                aria-labelledby="pills-year-reports-tab"
+              >
+                <input type="month" name="month" id="monthInput" />
+
+                <div class="table-responsive">
+                  <table class="table users-table" id="year-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" id="attTH">Month</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col" id="attTH">Attendance</th>
+                      </tr>
+                    </thead>
+                    <tbody id="year-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- End Year Report -->
+              <!-- Start Late Report -->
+              <div
+                class="tab-pane fade ps-5 pe-5"
+                id="pills-late-reports"
+                role="tabpanel"
+                aria-labelledby="pills-late-reports-tab"
+              >
+                <div class="table-responsive">
+                  <table class="table users-table" id="late-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Day</th>
+                        <th scope="col">Reason</th>
+                      </tr>
+                    </thead>
+                    <tbody id="late-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- End Late Report -->
             </div>
             <!-- End Reports -->
           </div>
         </div>
+        <!-- End Admin Section -->
+        <!-- Start Profile -->
+        <div
+          class="tab-pane fade ps-5 pe-5"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-profile-tab"
+        >
+          <!-- Start Admin Data -->
+          <div class="mt-4">
+            <form class="mt-1 mb-1" id="profileFrom"></form>
+          </div>
+          <!-- End Admin Data -->
+        </div>
+        <!-- End Profile -->
         <!-- End Employee Section -->
       </div>
       <!-- End dashboard content -->
