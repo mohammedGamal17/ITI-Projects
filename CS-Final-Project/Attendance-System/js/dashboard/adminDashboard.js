@@ -11,6 +11,7 @@ if (username != "mohammed_gamal7@outlook.com") {
   var lateReport = [];
 
   var today = formatDate(new Date()).slice(0, 10); ///* to get only Today date
+
   var now = new Date();
   var startDate = new Date(
     now.getFullYear(),
@@ -200,55 +201,107 @@ if (username != "mohammed_gamal7@outlook.com") {
   function getAllAttendance() {
     let employees = JSON.parse(window.localStorage.getItem("employees"));
     const monthlyTbody = document.getElementById("monthly-table");
+    const yearTbody = document.getElementById("year-tbody");
+
     if (employees != null) {
       employees.map((emp) => {
         if (emp.attendance != null) {
           var empFullName = emp.firstName + " " + emp.lastName;
           emp.attendance.map((e) => {
             let formed = e.split(" ").join(" ");
-
             var reason;
-            if (emp.late != undefined) {
-              emp.late.details.forEach((e) => {
-                if (formed == e.date) {
-                  if (e.reason != undefined) {
-                    reason = e.reason;
-                  } else {
-                    reason = " ";
-                  }
-                }
-              });
+            ///* Check month
+            if (today.slice(0, 2) == formed.slice(0, 2)) {
+              setLate(emp, formed, reason);
+              drawMonthTable(monthlyTbody, emp, formed);
             }
 
-            monthlyTbody.innerHTML += `
+            setLate(emp, formed, reason);
+            drawYearTable(yearTbody, emp, formed);
+
+            insertLateIntoLocalStorage(reason, lateReport);
+            insertAttendance(att, empFullName, emp, formed, reason);
+          });
+        }
+      });
+    }
+  }
+
+  function setLate(emp, formed, reason) {
+    if (emp.late != undefined) {
+      emp.late.details.forEach((e) => {
+        if (formed == e.date) {
+          if (e.reason != undefined) {
+            reason = e.reason;
+          } else {
+            reason = " ";
+          }
+        }
+      });
+    }
+  }
+
+  function drawMonthTable(table, emp, formed) {
+    table.innerHTML += `
           <tr>
             <td>${emp.firstName} ${emp.lastName}</td>
             <td>${emp.email}</td>
             <td>${formed}</td>
           </tr>
         `;
+  }
 
-            if (reason != undefined) {
-              lateReport.push({
-                name: empFullName,
-                email: emp.email,
-                reason: reason,
-                date: formed,
-              });
+  function drawYearTable(table, emp, formed) {
+    const calender = document.getElementById("monthInput");
+    const month = parseInt(formed.slice(0, 2));
 
-              window.localStorage.setItem("late", JSON.stringify(lateReport));
-            }
+    calender.addEventListener("change", function () {
+      if (getMonthFromInput() == month) {
+        table.innerHTML += `
+          <tr>
+            <td>${month}</td>
+            <td>${emp.firstName} ${emp.lastName}</td>
+            <td>${emp.email}</td>
+            <td>${formed}</td>
+          </tr>
+        `;
+      }
+    });
+  }
+  getMonthFromInput();
+  function getMonthFromInput() {
+    const calender = document.getElementById("monthInput");
+    const yearTbody = document.getElementById("year-tbody");
 
-            att.push({
-              name: empFullName,
-              email: emp.email,
-              attendance: formed,
-              reason: reason,
-            });
-          });
-        }
+    calender.min = "2023-01";
+    calender.max = "2023-12";
+
+    var month = calender.value.slice(-2);
+    calender.addEventListener("change", function () {
+      month = calender.value.slice(-2);
+    });
+    return parseInt(month);
+  }
+
+  function insertLateIntoLocalStorage(reason, lateReport) {
+    if (reason != undefined) {
+      lateReport.push({
+        name: empFullName,
+        email: emp.email,
+        reason: reason,
+        date: formed,
       });
+
+      window.localStorage.setItem("late", JSON.stringify(lateReport));
     }
+  }
+  function insertAttendance(att, empFullName, emp, formed, reason) {
+    att.push({
+      name: empFullName,
+      email: emp.email,
+      attendance: formed,
+      reason: reason,
+    });
   }
 
   drawDailyTable();
@@ -284,23 +337,6 @@ if (username != "mohammed_gamal7@outlook.com") {
           </tr>
         `;
       }
-
-      // <td>
-      //   <div class="container">
-      //     <div class="row">
-      //       <div class="col-lg-6 mb-lg-0 mb-2">
-      //         <button class="btn btn-success" id="allowBtn">
-      //           Accept
-      //         </button>
-      //       </div>
-      //       <div class="col-lg-6 mb-lg-0 mb-2">
-      //         <button class="btn btn-danger" id="rejectBtn">
-      //           Reject
-      //         </button>
-      //       </div>
-      //     </div>
-      //   </div>
-      // </td>;
     }
   }
 

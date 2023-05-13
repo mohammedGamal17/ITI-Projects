@@ -145,6 +145,20 @@
               <li class="nav-item" role="presentation">
                 <button
                   class="nav-link"
+                  id="pills-year-reports-tab"
+                  data-bs-toggle="pill"
+                  data-bs-target="#pills-year-reports"
+                  type="button"
+                  role="tab"
+                  aria-controls="pills-year-reports"
+                  aria-selected="false"
+                >
+                  Year Report
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
                   id="pills-late-reports-tab"
                   data-bs-toggle="pill"
                   data-bs-target="#pills-late-reports"
@@ -204,6 +218,30 @@
                 </div>
               </div>
               <!-- End Monthly Report -->
+              <!-- Start Year Report -->
+              <div
+                class="tab-pane fade ps-5 pe-5"
+                id="pills-year-reports"
+                role="tabpanel"
+                aria-labelledby="pills-year-reports-tab"
+              >
+                <input type="month" name="month" id="monthInput" />
+
+                <div class="table-responsive">
+                  <table class="table users-table" id="year-table">
+                    <thead>
+                      <tr>
+                        <th scope="col" id="attTH">Month</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col" id="attTH">Attendance</th>
+                      </tr>
+                    </thead>
+                    <tbody id="year-tbody"></tbody>
+                  </table>
+                </div>
+              </div>
+              <!-- End Year Report -->
               <!-- Start Late Report -->
               <div
                 class="tab-pane fade ps-5 pe-5"
