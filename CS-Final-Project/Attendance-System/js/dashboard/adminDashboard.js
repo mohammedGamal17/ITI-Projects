@@ -212,14 +212,43 @@ if (username != "mohammed_gamal7@outlook.com") {
             var reason;
             ///* Check month
             if (today.slice(0, 2) == formed.slice(0, 2)) {
-              setLate(emp, formed, reason);
+              if (emp.late != undefined) {
+                emp.late.details.forEach((e) => {
+                  if (formed == e.date) {
+                    if (e.reason != undefined) {
+                      reason = e.reason;
+                    } else {
+                      reason = " ";
+                    }
+                  }
+                });
+              }
               drawMonthTable(monthlyTbody, emp, formed);
             }
 
-            setLate(emp, formed, reason);
+            if (emp.late != undefined) {
+              emp.late.details.forEach((e) => {
+                if (formed == e.date) {
+                  if (e.reason != undefined) {
+                    reason = e.reason;
+                  } else {
+                    reason = " ";
+                  }
+                }
+              });
+            }
             drawYearTable(yearTbody, emp, formed);
+            if (reason != undefined) {
+              lateReport.push({
+                name: empFullName,
+                email: emp.email,
+                reason: reason,
+                date: formed,
+              });
 
-            insertLateIntoLocalStorage(reason, lateReport);
+              window.localStorage.setItem("late", JSON.stringify(lateReport));
+            }
+            //insertLateIntoLocalStorage(reason, lateReport);
             insertAttendance(att, empFullName, emp, formed, reason);
           });
         }
@@ -227,19 +256,7 @@ if (username != "mohammed_gamal7@outlook.com") {
     }
   }
 
-  function setLate(emp, formed, reason) {
-    if (emp.late != undefined) {
-      emp.late.details.forEach((e) => {
-        if (formed == e.date) {
-          if (e.reason != undefined) {
-            reason = e.reason;
-          } else {
-            reason = " ";
-          }
-        }
-      });
-    }
-  }
+  function setLate(emp, formed, reason) {}
 
   function drawMonthTable(table, emp, formed) {
     table.innerHTML += `
@@ -325,8 +342,11 @@ if (username != "mohammed_gamal7@outlook.com") {
     const late = document.getElementById("late-tbody");
     var lateRepo = JSON.parse(window.localStorage.getItem("late"));
 
-    for (let i = 0; i < lateReport.length; i++) {
-      const element = lateReport[i];
+    lateRepo.forEach((element) => {
+      console.log(element);
+    });
+    for (let i = 0; i < lateRepo.length; i++) {
+      const element = lateRepo[i];
       if (element.reason != undefined) {
         late.innerHTML += `
           <tr>
